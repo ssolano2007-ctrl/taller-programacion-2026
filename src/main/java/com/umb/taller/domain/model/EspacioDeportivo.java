@@ -12,44 +12,47 @@ public class EspacioDeportivo {
     private final int capacidadMaxima;
 
     public EspacioDeportivo(
-        Long id,
-        String nombre,
-        TipoEspacio tipo,
-        int capacidadMaxima) {
+            Long id,
+            String nombre,
+            TipoEspacio tipo,
+            int capacidadMaxima) {
 
         this.id = id;
         this.nombre = nombre;
         this.tipo = tipo;
         this.capacidadMaxima = capacidadMaxima;
         this.estado = EstadoEspacio.DISPONIBLE;
-}
+    }
 
-public Long getId() {
-    return id;
-}
+    public Long getId() {
+        return id;
+    }
 
-public String getNombre() {
-    return nombre;
-}
+    public String getNombre() {
+        return nombre;
+    }
 
-public TipoEspacio getTipo() {
-    return tipo;
-}
+    public TipoEspacio getTipo() {
+        return tipo;
+    }
 
-public EstadoEspacio getEstado() {
-    return estado;
-}
+    public EstadoEspacio getEstado() {
+        return estado;
+    }
 
-public int getCapacidadMaxima() {
-    return capacidadMaxima;
-}
+    public int getCapacidadMaxima() {
+        return capacidadMaxima;
+    }
 
-public boolean estadoDisponible() {
-    return estado == EstadoEspacio.DISPONIBLE;
-}
+    public boolean estaDisponible() {
+        return estado == EstadoEspacio.DISPONIBLE;
+    }
 
-public void habilitar() {
-    this.estado = EstadoEspacio.DISPONIBLE;
-}
+    public void ponerEnMantenimiento() {
+        this.estado = EstadoEspacio.MANTENIMIENTO;
+    }
 
+    public void habilitar() {
+        this.estado = EstadoEspacio.DISPONIBLE;
+    }
 }

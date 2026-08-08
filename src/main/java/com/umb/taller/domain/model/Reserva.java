@@ -4,6 +4,8 @@ import java.time.LocalDateTime;
 
 import com.umb.taller.domain.enums.EstadoReserva;
 
+import com.umb.taller.domain.exception.BusinessRuleException;
+
 public class Reserva {
 
     private final Long id;
@@ -52,32 +54,31 @@ public class Reserva {
     }
 
     public void confirmar() {
-         if (estado != EstadoReserva.PENDIENTE) {
-              throw new IllegalStateException(
+        if (estado != EstadoReserva.PENDIENTE) {
+            throw new BusinessRuleException(
                 "Solo una reserva pendiente puede ser confirmada.");
-             }
-
+        }
         this.estado = EstadoReserva.CONFIRMADA;
     }
 
     public void cancelar() {
-          if (estado == EstadoReserva.CANCELADA ||
-               estado == EstadoReserva.FINALIZADA) {
+        if (estado == EstadoReserva.CANCELADA ||
+            estado == EstadoReserva.FINALIZADA) {
 
-             throw new IllegalStateException(
+            throw new BusinessRuleException(
                 "La reserva no puede ser cancelada en su estado actual.");
-            }
-
-          this.estado = EstadoReserva.CANCELADA;
+        }
+        this.estado = EstadoReserva.CANCELADA;
     }
 
     public void finalizar() {
-              if (estado != EstadoReserva.CONFIRMADA) {
-               throw new IllegalStateException(
+        if (estado != EstadoReserva.CONFIRMADA) {
+            throw new BusinessRuleException(
                 "Solo una reserva confirmada puede ser finalizada.");
-            }
-
-             this.estado = EstadoReserva.FINALIZADA;
+        }
+        this.estado = EstadoReserva.FINALIZADA; 
     }
+
+
 }
 
