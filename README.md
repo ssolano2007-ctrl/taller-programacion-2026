@@ -49,6 +49,7 @@ GitHub Actions is configured to automatically compile the project and execute th
 
 - Andres Santiago Solano Caballero
 - Maicol David Rubiano Ruiz
+- Jesus Sebastian Medina Claros
 
 ## Academic Project
 
