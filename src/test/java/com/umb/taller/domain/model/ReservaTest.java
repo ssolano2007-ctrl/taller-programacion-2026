@@ -12,6 +12,7 @@ import org.junit.jupiter.api.Test;
 import com.umb.taller.domain.enums.EstadoReserva;
 import com.umb.taller.domain.enums.TipoEspacio;
 import com.umb.taller.domain.exception.BusinessRuleException;
+import com.umb.taller.domain.exception.ValidationException;
 
 class ReservaTest {
 
@@ -91,5 +92,61 @@ class ReservaTest {
                 .isInstanceOf(BusinessRuleException.class)
                 .hasMessageContaining(
                         "Solo una reserva confirmada puede ser finalizada");
+    }
+
+    @Test
+    void noDeberiaCrearReservaConIdInvalido() {
+
+        assertThatThrownBy(() ->
+                new Reserva(
+                        0L,
+                        usuario,
+                        espacio,
+                        horario))
+                .isInstanceOf(ValidationException.class)
+                .hasMessageContaining(
+                        "El identificador de la reserva debe ser válido");
+    }
+
+    @Test
+    void noDeberiaCrearReservaSinUsuario() {
+
+        assertThatThrownBy(() ->
+                new Reserva(
+                        2L,
+                        null,
+                        espacio,
+                        horario))
+                .isInstanceOf(ValidationException.class)
+                .hasMessageContaining(
+                        "El usuario de la reserva es obligatorio");
+    }
+
+    @Test
+    void noDeberiaCrearReservaSinEspacioDeportivo() {
+
+        assertThatThrownBy(() ->
+                new Reserva(
+                        3L,
+                        usuario,
+                        null,
+                        horario))
+                .isInstanceOf(ValidationException.class)
+                .hasMessageContaining(
+                        "El espacio deportivo de la reserva es obligatorio");
+    }
+
+    @Test
+    void noDeberiaCrearReservaSinHorario() {
+
+        assertThatThrownBy(() ->
+                new Reserva(
+                        4L,
+                        usuario,
+                        espacio,
+                        null))
+                .isInstanceOf(ValidationException.class)
+                .hasMessageContaining(
+                        "El horario de la reserva es obligatorio");
     }
 }
