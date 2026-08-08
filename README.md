@@ -6,6 +6,7 @@ SportBooking is a sports facility reservation management system developed as par
 
 - Andres Santiago Solano Caballero
 - Maicol David Rubiano Ruiz
+- Jesus sebastian medina claros
 
 ## Technologies
 
