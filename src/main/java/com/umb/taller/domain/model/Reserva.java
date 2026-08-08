@@ -52,15 +52,32 @@ public class Reserva {
     }
 
     public void confirmar() {
+         if (estado != EstadoReserva.PENDIENTE) {
+              throw new IllegalStateException(
+                "Solo una reserva pendiente puede ser confirmada.");
+             }
+
         this.estado = EstadoReserva.CONFIRMADA;
     }
 
     public void cancelar() {
-        this.estado = EstadoReserva.CANCELADA;
+          if (estado == EstadoReserva.CANCELADA ||
+               estado == EstadoReserva.FINALIZADA) {
+
+             throw new IllegalStateException(
+                "La reserva no puede ser cancelada en su estado actual.");
+            }
+
+          this.estado = EstadoReserva.CANCELADA;
     }
 
-    public void finalizar () {
-        this.estado = EstadoReserva.FINALIZADA;
+    public void finalizar() {
+              if (estado != EstadoReserva.CONFIRMADA) {
+               throw new IllegalStateException(
+                "Solo una reserva confirmada puede ser finalizada.");
+            }
+
+             this.estado = EstadoReserva.FINALIZADA;
     }
 }
 
